@@ -5,6 +5,7 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
+const cors = require('cors'); // Import CORS package
 require('dotenv').config();
 
 const app = express();
@@ -28,6 +29,9 @@ const User = mongoose.model('User', userSchema);
 const upload = multer({ dest: 'uploads/' });
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Enable CORS
+app.use(cors()); // This will allow all domains to make requests
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
